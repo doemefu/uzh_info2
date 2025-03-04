@@ -3,6 +3,7 @@
 //
 
 #include <stdio.h>
+#include <stdbool.h>
 
 void compression(char string[], int n){
   char out[n];
@@ -27,6 +28,8 @@ void compression(char string[], int n){
 
   printf("%c", *"\n");
   printf("%s", out);
+  printf("%c", *"\n");
+
 }
 
 int sum_or_not(int A[], int n, int t) {
@@ -40,9 +43,24 @@ int sum_or_not(int A[], int n, int t) {
   return 0;
 }
 
+//precondition: A sorted ascending
+int sum_or_not_efficient(int A[], int n, int t) {
+  int i = 0;
+  int j = n-1;
+  while (i<j) {
+    if (A[i]+A[j] == t) {
+      return 1;
+    }else if (A[i]+A[j] < t) {
+      i++;
+    }else{
+      j--;
+    }
+  }
+}
+
 int zeroSubarray(int A[], int n) {
   for (int i=0; i<n; i++) {
-    for (int a=i+1; a<=n; a++) {
+    for (int a=i+1; a<n; a++) {
       int sum=0;
       for (int x=0; x < a-i; x++) {
         sum += A[x];
@@ -56,9 +74,18 @@ int zeroSubarray(int A[], int n) {
 }
 
 int main(){
-  char string[] = "aaabbbccc";
-  int n = sizeof(string)/sizeof(string[0]);
-  //compression(string, n);
+
+
+  while(true){
+    char compress[50];
+    printf("Enter a String that you want to compress: ");
+    scanf("%s",compress);
+    //char string[] = "xaaabbbcccajksdhfiewabcaulebrvealjghfjdgaldhjsfkahsdfhkew";
+  	int n = sizeof(compress)/sizeof(compress[0]);
+    printf("The length of the string is: %d\n", n);
+  	compression(compress, n);
+  }
+
 
   int numbers[] = {1,5,6,3,8,2,9,4,7};
   int m = sizeof(numbers)/sizeof(numbers[0]);
@@ -77,11 +104,11 @@ int main(){
   int n4 = sizeof(arr4) / sizeof(arr4[0]);
   int n5 = sizeof(arr5) / sizeof(arr5[0]);
 
-  printf("Test Case 1: %d\n", zeroSubarray(arr1, n1)); // Expected: 1
-  printf("Test Case 2: %d\n", zeroSubarray(arr2, n2)); // Expected: 1
-  printf("Test Case 3: %d\n", zeroSubarray(arr3, n3)); // Expected: 0
-  printf("Test Case 4: %d\n", zeroSubarray(arr4, n4)); // Expected: 1
-  printf("Test Case 5: %d\n", zeroSubarray(arr5, n5)); // Expected: 1
+  //printf("Test Case 1: %d\n", zeroSubarray(arr1, n1)); // Expected: 1
+  //printf("Test Case 2: %d\n", zeroSubarray(arr2, n2)); // Expected: 1
+  //printf("Test Case 3: %d\n", zeroSubarray(arr3, n3)); // Expected: 0
+  //printf("Test Case 4: %d\n", zeroSubarray(arr4, n4)); // Expected: 1
+  //printf("Test Case 5: %d\n", zeroSubarray(arr5, n5)); // Expected: 1
 
   return 0;
 }
