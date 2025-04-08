@@ -25,7 +25,7 @@ void print_months(struct month *head) {
 
 struct month *get_previous_month(struct month *head, char *searchMonthName) {
     /* Task 2.2 */
-    while(head != NULL){
+    while(head->next != NULL){
         if (strcmp((*(*head).next).month_name, searchMonthName)==0) {
             printf("Preceding of %s is %s; ", searchMonthName, (*head).month_name);
             return head;
@@ -39,7 +39,7 @@ struct month *get_previous_month(struct month *head, char *searchMonthName) {
 struct month *get_previous_month_struct(struct month *head, struct month *a) {
     /* Task 2.2 */
     struct month *prev = head;
-    while(head != NULL || a != NULL){
+    while(head->next != NULL || a != NULL){
         if ((*prev).next == a) {
             printf("Preceding of %s is %s; ", a->month_name, (*prev).month_name);
             return prev;
@@ -77,44 +77,6 @@ struct month *swap_month(struct month *head, struct month *a, struct month *b) {
     return head;
 }
 
-struct month *swap_month_lukas(struct month *head, struct month *a, struct month *b) {
-    if (head == NULL || head-> next == NULL) return head;
-    struct month *prev_a = get_previous_month(head, a);
-    struct month *prev_b = get_previous_month(head, b);
-
-    if (a->next == b) {
-        if (prev_a) {
-            prev_a->next = b;
-        } else {
-            head = b;
-        }
-        a->next = b->next;
-        b->next = a;
-    } else if (b->next == a) {
-        if (prev_b) {
-            prev_b->next = a;
-        } else {
-            head = a;
-        }
-        b->next = a->next;
-        a->next = b;
-    } else {
-        if (prev_a) {
-            prev_a->next = b;
-        } else {
-            head = b;
-        }
-        if (prev_b) {
-            prev_b->next = a;
-        } else {
-            head = a;
-        }
-        struct month *temp = b->next;
-        b->next = a->next;
-        a->next = temp;
-    }
-    return head;
-}
 
 struct month *selection_sort(struct month *head) {
     /* TODO: Implement task 2.4 */
@@ -159,7 +121,7 @@ int main(int argc, char *argv[]) {
     printf("return value: %s", get_previous_month(head, "July")->month_name);
 
     printf("\nTask2.3: ");
-    struct month *x = head->next->next;
+    struct month *x = head->next->next->next->next->next->next->next->next->next->next;
     struct month *y = head->next->next->next->next->next->next->next->next->next->next->next;
     head = swap_month(head, x,y);
     print_months(head);
