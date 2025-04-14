@@ -48,10 +48,11 @@ void push(int number, struct myStack** s) {
   *s = newElement;
 }
 
-void printer(struct myStack* s) {
-  while(s->next != NULL){
-    printf("%i",s->content);
-    s=s->next;
+void printer(struct myStack** s) {
+  struct myStack* curr = *s;
+  while(curr->next != NULL){
+    printf("%i",curr->content);
+    curr=curr->next;
   }
 }
 
