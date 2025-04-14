@@ -40,8 +40,7 @@ void push(int number, struct myStack* s) {
 }
 
 void printer(struct myStack* s) {
-  int list_length = sizeof(s->content) / sizeof(s->content[0]);
-  for (int i=0;i<list_length;i++) {
+  for (int i=0;i<5;i++) {
     printf("%i",s->content[i]);
   }
 }
@@ -53,7 +52,8 @@ void main(){
   push(3,elStack);
   printf("%i",*elStack->content);
   printf("\n");
-
+  push(8,elStack);
+  push(1,elStack);
   printer(elStack);
   while (!isEmpty(elStack)){
     printf("Popped: %d\n", pop(elStack));
