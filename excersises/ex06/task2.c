@@ -39,7 +39,7 @@ struct month *get_previous_month(struct month *head, char *searchMonthName) {
 struct month *get_previous_month_struct(struct month *head, struct month *a) {
     /* Task 2.2 */
     struct month *prev = head;
-    while(head->next != NULL || a != NULL){
+    while(head->next != NULL){
         if ((*prev).next == a) {
             printf("Preceding of %s is %s; ", a->month_name, (*prev).month_name);
             return prev;
@@ -56,8 +56,10 @@ struct month *swap_month(struct month *head, struct month *a, struct month *b) {
     while (start->next != a && start!=a) {
         start = start->next;
     }
+
     struct month *tmp = a->next;
     a->next = b->next;
+
     if (start!=a) {
         start->next = b;
         b->next = tmp;
@@ -69,7 +71,7 @@ struct month *swap_month(struct month *head, struct month *a, struct month *b) {
 
     start = tmp;
 
-    while (start->next != b) {
+    while (start->next != b && start->next != NULL) {
         start = start->next;
     }
     start->next = a;
@@ -104,7 +106,7 @@ struct month *selection_sort(struct month *head) {
             tmp = tmp->next;
         }
         head = swap_month(head,start, min);
-        start = min->next;
+        start = min;
     }
 
     return head;
