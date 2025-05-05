@@ -6,14 +6,30 @@
 
 /* Implement */
 int insertKeyH1(int *HT, int k) {
-    /* TODO task 2.1 */
-    return 0;
+    int conflicts = 0;
+    int key = k%7;
+
+    while (HT[key] != -1) {
+        key++;
+        conflicts++;
+    }
+
+    HT[key] = k;
+    return conflicts;
 }
 
 /* Implement */
 int insertKeyH2(int *HT, int k) {
-    /* TODO task 2.2 */
-    return 0;
+    int conflicts = 0;
+    int key = k%151;
+
+    while (HT[key] != -1) {
+        key++;
+        conflicts++;
+    }
+
+    HT[key] = k;
+    return conflicts;
 }
 
 /* given */
@@ -31,7 +47,7 @@ void printHT(int *HT) {
     printf("\n");
 }
 
-int main(int argc, char *argv[]) {
+int main(int argc, char *argv[]) { //no change required
     clock_t start_time, end_time;
     int collisions = 0;
     int HT[N];

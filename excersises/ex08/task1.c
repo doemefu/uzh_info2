@@ -77,6 +77,52 @@ void stack_traverseTree(struct TreeNode* root){
 
 struct TreeNode* delete(struct TreeNode** root, int val){
 
+  struct TreeNode* parent = NULL;
+  struct TreeNode* current = *root;
+
+  while (current != NULL && current->val != val) {
+    parent = current;
+    if (current->val > val) {
+      current = current->left;
+    }else {
+      current = current->right;
+    }
+  }
+
+  if (current==NULL || parent==NULL) { //not found
+    *root = NULL;
+    return *root;
+  }
+
+  if (current->left == NULL && current->right==NULL) { //zero leaf nodes
+    if (parent->left == current) {
+      parent->left==NULL;
+    }else {
+      parent->right==NULL;
+    }
+    return *root;
+  }
+
+  if (current->left == NULL || current->right==NULL) {    //one leaf node
+    if (parent->left == current) {                        //curr is left
+      if (current->left != NULL) {                        //child is left
+        parent->left = current->left;
+      }else {                                             //child is right
+        parent->left = current->right;
+      }
+    }else {                                               //curr is right
+      if (current->left != NULL) {                        //child is left
+        parent->right = current->left;
+      }else {                                             //child is right
+        parent->right = current->right;
+      }
+    }
+    return *root;
+  }
+
+
+
+
   return NULL;
 }
 
