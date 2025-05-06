@@ -11,7 +11,6 @@ int majorityElement(int A[], int l, int r) {
   }
 
   int m = (l+r)/2;
-
   int leftside = majorityElement(A, l, m);
   int rightSide = majorityElement(A,m+1,r);
 
