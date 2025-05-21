@@ -21,7 +21,7 @@ int insertKeyH1(int *HT, int k) {
 /* Implement */
 int insertKeyH2(int *HT, int k) {
     int conflicts = 0;
-    int key = k%151;
+    int key = k%147;
 
     while (HT[key] != -1) {
         key++;
